@@ -66,22 +66,28 @@ def run(input_path, output_path):
     files, count = get_files(input_path)
     digits = len(str(count))
     print('Total file count: ', count)
-
+    
+    # 저장할 수와 폴더를 선언
+    validation_num = 38574
+    validation_folder = r"C:/Users/USER/Parking_control_system/numberdata/validation"
+    test_num = 46840
+    test_folder = r"C:/Users/USER/Parking_control_system/numberdata/test"
+    
     # Create gt.txt and copy images
     gt_file = open(os.path.join(output_path, 'gt.txt'), 'w', encoding='UTF8')
     for idx, item in enumerate(files):
         if (idx+1) % 100 == 0:
             print(('\r%{}d / %{}d Processing !!'.format(digits, digits)) % (idx+1, len(files)), end='')
 
-        if 38574 == idx:
-            output_path = r"C:/Users/USER/Parking_control_system/numberdata/validation"
+        if validation_num == idx:
+            output_path = validation_folder
             gt_file.close()
             gt_file = open(os.path.join(output_path, 'gt.txt'), 'w', encoding='UTF8')
             image_path = os.path.join(output_path, image_folder_name)
             for path in [output_path, image_path]:
                 os.makedirs(path, exist_ok=True)
-        elif 46840 == idx :
-            output_path = r"C:/Users/USER/Parking_control_system/numberdata/test"
+        elif test_num == idx :
+            output_path = test_folder
             gt_file.close()
             gt_file = open(os.path.join(output_path, 'gt.txt'), 'w', encoding='UTF8')
             image_path = os.path.join(output_path, image_folder_name)
