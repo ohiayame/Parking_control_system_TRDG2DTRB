@@ -73,12 +73,28 @@ def run(input_path, output_path):
         if (idx+1) % 100 == 0:
             print(('\r%{}d / %{}d Processing !!'.format(digits, digits)) % (idx+1, len(files)), end='')
 
+        if 38574 == idx:
+            output_path = r"C:/Users/USER/Parking_control_system/numberdata/validation"
+            gt_file.close()
+            gt_file = open(os.path.join(output_path, 'gt.txt'), 'w', encoding='UTF8')
+            image_path = os.path.join(output_path, image_folder_name)
+            for path in [output_path, image_path]:
+                os.makedirs(path, exist_ok=True)
+        elif 46840 == idx :
+            output_path = r"C:/Users/USER/Parking_control_system/numberdata/test"
+            gt_file.close()
+            gt_file = open(os.path.join(output_path, 'gt.txt'), 'w', encoding='UTF8')
+            image_path = os.path.join(output_path, image_folder_name)
+            for path in [output_path, image_path]:
+                os.makedirs(path, exist_ok=True)
+
         gt = os.path.basename(item).split('_')[0]   # remove index
         ext = os.path.splitext(item)[1]
 
         filename = os.path.join(image_folder_name, ('image_%0{}d'.format(digits) % idx) + ext)
         gt_file.write('%s\t%s\n' % (filename, gt))
         shutil.copy(item, os.path.join(output_path, filename))
+        
 
     gt_file.close()
 
